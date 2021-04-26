@@ -208,13 +208,16 @@ function opalestate_toggle_featured_property() {
 
 	if ( $post->post_author == $user_id ) {
 
-		$check = apply_filters( 'opalestate_set_feature_property_checked', false );
-		if ( $check ) {
-			do_action( 'opalestate_toggle_featured_property_before', $user_id, $property_id );
-			update_post_meta( $property_id, OPALESTATE_PROPERTY_PREFIX . 'featured', 'on' );
-			echo json_encode( [ 'status' => true, 'msg' => esc_html__( 'Could not set this as featured', 'opalestate-pro' ) ] );
-			wp_die();
-		}
+                $isfeatured = get_post_meta( $property_id, OPALESTATE_PROPERTY_PREFIX . 'featured', true );
+                if( $isfeatured ) {
+                        update_post_meta( $property_id, OPALESTATE_PROPERTY_PREFIX . 'featured', '' );
+                        echo json_encode( [ 'status' => false, 'msg' => esc_html__( 'Immobile tolto da evidenza', 'opalestate-pro' ) ] );
+                        wp_die();
+                } else {
+                        update_post_meta( $property_id, OPALESTATE_PROPERTY_PREFIX . 'featured', 'on' );
+                        echo json_encode( [ 'status' => false, 'msg' => esc_html__( 'Immobile messo in evidenza', 'opalestate-pro' ) ] );
+                        wp_die();
+                }
 	}
 
 	echo json_encode( [ 'status' => false, 'msg' => esc_html__( 'Could not set this as featured', 'opalestate-pro' ) ] );
