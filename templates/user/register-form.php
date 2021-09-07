@@ -91,7 +91,13 @@ $type_default = apply_filters( 'opalestate_register_form_default_type', 'subscri
 			<?php if ( $redirect ) : ?>
                 <input type="hidden" name="redirect" value="<?php echo esc_url( $redirect ); ?>">
 			<?php endif; ?>
-            <input type="submit" class="opalestate-button button btn btn-primary" name="register" value="<?php esc_attr_e( 'Register', 'opalestate-pro' ); ?>"/>
+		
+	<?php
+		/** DISABLE REGISTATION BY HIDING THE BUTTON
+		* <input type="submit" class="opalestate-button button btn btn-primary" name="register" value="<?php esc_attr_e( 'Register', 'opalestate-pro' ); ?>"/>
+		*/
+		?>
+            
         </p>
 
 		<?php do_action( 'opalestate_member_after_register_form' ); ?>
